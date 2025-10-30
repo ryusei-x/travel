@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>経済のたまり場</title>
+    <!-- Font Awesome (アイコン用) を追加 -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <!-- 画像をヘッダーの背景として配置 -->
+        <img src="economy.jpg" alt="経済のイメージ" id="header-image">
+        
+        <!-- ★修正点: 画像の上に重ねるためのコンテナ (.header-content) を追加★ -->
+        <div class="header-content">
+            <h1>政治のたまり場</h1>
+            <p>このサイトは政治について議論するサイトです。できることは主に、以下の３つです</p>
+            <nav>
+                <li>1.政治に関する話題を投稿</li>
+                <li>2.投稿に対して、いいねや返信で参加</li>
+                <li>3.話題への反応を見て考察や語り合って楽しむ</li>
+            </nav>
+            <nav> 
+                <p>禁止事項は以下の１つです</p>
+                <li>1.いかなる誹謗中傷を目的としたコメントも行わない</li>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="share-container">
+        <a 
+            href="#" 
+            id="lineShareButton"
+            class="share-button line"
+        >
+            LINE <span>&#9990;</span>
+        </a>
+    </div>
+
+    <main>
+        <p>気に入った人は、拡散よろしく↑↑↑</p>
+        <input id="author" placeholder="ニックネーム(省略可)" value="">
+        <textarea id="content" placeholder="コメントしてください" ></textarea>
+        <button id="postButton">投稿する</button>
+
+        <div id="posts">
+            <!-- 投稿はここにリアルタイムで表示されます -->
+        </div>
+    </main>
+
+    <!-- Firebase SDKのインポート (元のコードから変更なし) -->
+    <script type="module">
+        // 必要な関数を CDN からインポート
+        import { 
+            initializeApp 
+        } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            query, 
+            orderBy, 
+            onSnapshot, 
+            serverTimestamp,
+            // --- ★追加・修正した関数★ ---
+            doc, 
+            updateDoc, 
+            increment,
+            arrayUnion,
+            arrayRemove,
+            getDoc,
+            // -----------------------------
+        } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+        // あなたの Firebase 設定
+        const firebaseConfig = {
+    apiKey: "AIzaSyDtxS5IwIdvZDrxVJy5okWN5XmTAj1TeuY",
+    authDomain: "economy-58c85.firebaseapp.com",
+    projectId: "economy-58c85",
+    storageBucket: "economy-58c85.firebasestorage.app",
+    messagingSenderId: "935916061387",
+    appId: "1:935916061387:web:3c66e724092052eea9514e",
+    measurementId: "G-T1WT7ZMQW6"
+        };
+
+        // Firebase の初期化
+        const app = initializeApp(firebaseConfig);
+        
+        // Firestore のインスタンスを取得
+        const db = getFirestore(app);
+
+        // 投稿処理を script.js で行うために、必要な関数とインスタンスをグローバルに公開します。
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.onSnapshot = onSnapshot;
+        window.serverTimestamp = serverTimestamp;
+        // --- ★追加・修正した関数を公開★ ---
+        window.doc = doc;
+        window.updateDoc = updateDoc;
+        window.increment = increment;
+        window.arrayUnion = arrayUnion;
+        window.arrayRemove = arrayRemove;
+        window.getDoc = getDoc;
+        // ------------------------------------
+    </script>
+    
+    <!-- 投稿処理のスクリプト -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
